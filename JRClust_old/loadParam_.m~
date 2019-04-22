@@ -1,4 +1,4 @@
-function [P, vcFile_prm] = loadParam_(vcFile_prm,varargin)
+function [P, vcFile_prm] = loadParam_(vcFile_prm)
 % Load prm file
 if ~exist(vcFile_prm, 'file')
     fprintf(2, '.prm file does not exist: %s\n', vcFile_prm);
@@ -6,24 +6,8 @@ if ~exist(vcFile_prm, 'file')
 end
 P0 = file2struct('/home/mestalbet/NSKToolbox/JRClust/default.prm');  %P = defaultParam();
 P = file2struct(vcFile_prm);
-
-if nargin>1
-    vcFile_prb = varargin{1};
-    S_prb = file2struct(vcFile_prb);
-    P.viSite2Chan = S_prb.channels;
-    P.mrSiteXY = S_prb.geometry;
-    P.vrSiteHW = S_prb.pab;
-    P.spkRefrac_ms = 1;
-    P.sRateHz = 0.1;
-    P.spkLim_ms = [-.40, .96];
-    P.spkLim_ms_fet =[];
-    P.slopeLim_ms = [0.1, 0.6];
-    P.vcDataType = 'int16';
-    P.spkThresh_uV = [];
-    P.uV_per_bit = 10;
-    P.maxSite = 2.5;
-end
-% P.viSite2Chan
+P.spkRefrac_ms = 1;
+P.sRateHz = 0.1;
 if ~isfield(P, 'template_file'), P.template_file = ''; end
 if ~isempty(P.template_file)
     P0 = struct_merge_(P0, file2struct_(P.template_file));

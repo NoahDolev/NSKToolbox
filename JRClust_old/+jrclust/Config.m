@@ -385,7 +385,8 @@ classdef Config < dynamicprops
             if obj.batchMode
                 warning(wmsg);
             else
-                uiwait(warndlg(wmsg, varargin{:}, 'modal'));
+%                 uiwait(warndlg(wmsg, varargin{:}, 'modal'));
+                display(wmsg);
             end
         end
     end

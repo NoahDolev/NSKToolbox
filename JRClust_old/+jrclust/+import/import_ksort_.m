@@ -1,4 +1,4 @@
-function import_ksort_(vcFile_prm, fSort)
+function import_ksort_(vcFile_prm, fSort,varargin)
 % import_ksort_(P, fSort)
 % import_ksort_(vcFile_prm, fSort)
 fMerge_post = 0;
@@ -8,7 +8,7 @@ if isstruct(vcFile_prm)
     P = vcFile_prm;
     vcFile_prm = P.vcFile_prm;
 else
-    P = loadParam_(vcFile_prm); %makeParam_kilosort_
+    P = loadParam_(vcFile_prm,varargin{1}); %makeParam_kilosort_
 end
 
 % S_ksort = load(strrep(P.vcFile_prm, '.prm', '_ksort.mat')); % contains rez structure
@@ -19,7 +19,7 @@ global tnWav_raw tnWav_spk trFet_spk
 
 % Create a prm file to start with. set the filter parameter correctly. features? 
 if isempty(P), return; end
-S_ksort = load(strrep(P.vcFile_prm, '.prm', '_ksort.mat')); %get site # and 
+S_ksort = load(strrep(strrep(P.vcFile_prm,'/run=1/','/run=1'), '.prm', '__JRC_ksort.mat')); %get site # and 
 viTime_spk = S_ksort.rez.st3(:,1) - 6; %spike time (apply shift factor)
 viClu = S_ksort.rez.st3(:,2); % cluster
 

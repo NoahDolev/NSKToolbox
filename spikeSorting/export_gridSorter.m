@@ -6,8 +6,9 @@ fZeroIndex = 0; %zero-based index export (disable to export as matlab index star
 
 % S0 = get(0, 'UserData');
 if nargin==2
-    [S0, P, S_clu] = get0_();
+    [S0, P, S_clu] = get0();
 elseif nargin==1
+    S0 = jrclust.Config(varargin{1});
     P = varargin{1};
     vcFile_prm = P.vcFile_prm;
     S0 = load_cached_(P, 0);
